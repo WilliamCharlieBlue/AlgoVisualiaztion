@@ -1,5 +1,8 @@
+import javafx.beans.binding.ObjectExpression;
+
 import javax.swing.*;
 import java.awt.*;
+import java.util.LinkedList;
 
 public class AlgoFrame extends JFrame{
     private int canvasWidth;
@@ -29,9 +32,11 @@ public class AlgoFrame extends JFrame{
     public int getCanvasHeight(){return canvasHeight;}
 
     // TODO: 设置自己的数据
-    private int[] money;
-    public void render(int[] money){
-        this.money = money;
+    private Circle circle;
+    private LinkedList<Point> points;
+    public void render(Circle circle, LinkedList<Point> points){
+        this.circle = circle;
+        this.points = points;
         repaint();
     }
 
@@ -55,21 +60,19 @@ public class AlgoFrame extends JFrame{
 
             // 具体绘制
             // TODO： 绘制自己的数据data
+            AlgoVisHelper.setSrokeWidth(g2d, 3);
+            AlgoVisHelper.setColor(g2d, AlgoVisHelper.Blue);
+            AlgoVisHelper.strokeCircle(g2d, circle.getX(), circle.getY(), circle.getY());
 
-            // 获取平均每个柱子的宽度，使用时用w-1，留出1像素的空隙。
-            int w = canvasWidth /money.length;
-            for(int i =0 ; i< money.length; i++)
-                // x,y 是矩形左上角的坐标
-                if(money[i] > 0) {
+            for(int i =0; i < points.size(); i++){
+                Point p = points.get(i);
+                if(circle.contain(p))
+                    AlgoVisHelper.setColor(g2d, AlgoVisHelper.Red);
+                else
                     AlgoVisHelper.setColor(g2d, AlgoVisHelper.Blue);
-                    // 从画布的中间区分，正数在中线以上
-                    AlgoVisHelper.fillRectangle(g2d, i * w + 1, canvasHeight/2 - money[i], w - 1, money[i]);
-                }
-                else if(money[i] < 0){
-                    AlgoVisHelper.setColor(g2d , AlgoVisHelper.Red);
-                // 负数的起点就在中线上，高度要取绝对值
-                    AlgoVisHelper.fillRectangle(g2d, i*w +1, canvasHeight/2, w-1, -money[i]);
-                }
+                AlgoVisHelper.fillCircle(g2d, p.x, p.y, 3);
+            }
+
         }
 
         @Override

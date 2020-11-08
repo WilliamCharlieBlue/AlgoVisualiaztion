@@ -55,21 +55,12 @@ public class AlgoFrame extends JFrame{
 
             // 具体绘制
             // TODO： 绘制自己的数据data
-
+            AlgoVisHelper.setColor(g2d , AlgoVisHelper.Blue);
             // 获取平均每个柱子的宽度，使用时用w-1，留出1像素的空隙。
             int w = canvasWidth /money.length;
             for(int i =0 ; i< money.length; i++)
                 // x,y 是矩形左上角的坐标
-                if(money[i] > 0) {
-                    AlgoVisHelper.setColor(g2d, AlgoVisHelper.Blue);
-                    // 从画布的中间区分，正数在中线以上
-                    AlgoVisHelper.fillRectangle(g2d, i * w + 1, canvasHeight/2 - money[i], w - 1, money[i]);
-                }
-                else if(money[i] < 0){
-                    AlgoVisHelper.setColor(g2d , AlgoVisHelper.Red);
-                // 负数的起点就在中线上，高度要取绝对值
-                    AlgoVisHelper.fillRectangle(g2d, i*w +1, canvasHeight/2, w-1, -money[i]);
-                }
+                AlgoVisHelper.fillRectangle(g2d, i*w +1, canvasHeight-money[i], w-1, money[i]);
         }
 
         @Override
