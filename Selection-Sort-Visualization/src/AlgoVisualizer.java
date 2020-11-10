@@ -4,7 +4,7 @@ import java.awt.event.MouseAdapter;
 
 public class AlgoVisualizer {
     // TODO: 创建自己的数据
-    private static int DELAY =40; //屏幕等待的时间
+    private static int DELAY =20; //屏幕等待的时间
     private SelectionSortData data;      // 数据
     private AlgoFrame frame;  // 视图
 
@@ -28,24 +28,56 @@ public class AlgoVisualizer {
     }
 
     // 动画逻辑
+//    private void run(){
+//
+//        // TODO: 编写自己的动画逻辑
+//        frame.render(data);
+//        AlgoVisHelper.pause(DELAY);
+//        for(int i = 0; i < data.N(); i++){
+//            // 寻找[i, n)区间里的最小值的索引
+//            int minIndex = i;
+//            for(int j = i + 1; j < data.N(); j++){
+//                if(data.get(j) < data.get(minIndex)){
+//                    minIndex =j;
+//                }
+//            }
+//            data.swap(i, minIndex);
+//            // 每次交换之后，渲染一次
+//            frame.render(data);
+//            AlgoVisHelper.pause(DELAY);
+//        }
+//        frame.render(data);
+//        AlgoVisHelper.pause(DELAY);
+//    }
     private void run(){
-
-        // TODO: 编写自己的动画逻辑
-        frame.render(data);
-        AlgoVisHelper.pause(DELAY);
-        for(int i = 0; i < data.N(); i++){
+        // 初始时都是无序的，循环时，更新相应的i，j，变量每变化一次就setData一次。
+        setData(0, -1, -1);
+        for(int i = 0; i < data.N(); i++) {
             // 寻找[i, n)区间里的最小值的索引
             int minIndex = i;
-            for(int j = i + 1; j < data.N(); j++){
-                if(data.get(j) < data.get(minIndex)){
-                    minIndex =j;
+            // CompareIndex 是j
+            setData(i, -1, minIndex);
+            for (int j = i + 1; j < data.N(); j++) {
+                setData(i, j, minIndex);
+                if (data.get(j) < data.get(minIndex)) {
+                    minIndex = j;
+                    // 此次虽然代码一样，但minIndex已经发生了变化
+                    setData(i, j, minIndex);
                 }
             }
             data.swap(i, minIndex);
-            // 每次交换之后，渲染一次
-            frame.render(data);
-            AlgoVisHelper.pause(DELAY);
+            //
+            setData(i+1, -1, -1);
         }
+
+            setData(data.N(), -1, -1);
+    }
+
+    private void setData(int orderedIndex, int currentCompareIndex, int currentMinIndex){
+        data.orderedIndex = orderedIndex;
+        data.currentCompareIndex = currentCompareIndex;
+        data.currentMinIndex = currentMinIndex;
+
         frame.render(data);
         AlgoVisHelper.pause(DELAY);
     }
