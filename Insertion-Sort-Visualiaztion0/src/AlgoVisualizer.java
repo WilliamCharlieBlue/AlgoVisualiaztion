@@ -36,7 +36,7 @@ public class AlgoVisualizer {
             // 在循环条件中就已经将对orderedIndex之前的值进行了判断
             for(int j = i; j > 0 && data.get(j) < data.get(j-1); j--){
                 data.swap(j,j-1);
-
+                
                 // 一旦交换一个元素，意味着我们正在整理从0-i共i+1个元素，同时由于j与j-1交换了，根据下一步j--，我们此刻已经转移到j-1了
                 setData(i+1, j-1);
             }

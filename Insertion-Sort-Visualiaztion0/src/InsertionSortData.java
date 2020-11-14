@@ -23,6 +23,6 @@ public class InsertionSortData {
             throw new IllegalArgumentException("Invalid index to access Sort Data i/j");
         int t = numbers[i];
         numbers[i] = numbers[j];
-        numbers[j] = t; 
+        numbers[j] = t;
     }
 }
