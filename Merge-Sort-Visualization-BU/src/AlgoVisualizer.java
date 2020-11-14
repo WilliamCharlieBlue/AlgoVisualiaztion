@@ -27,11 +27,27 @@ public class AlgoVisualizer {
     }
 
     // 动画逻辑
+// 自顶向下TopDown,使用递归来实现
+//    private void run(){
+//
+//        // TODO: 编写自己的动画逻辑
+//        setData(-1, -1, -1);
+//        mergeSort(0, data.N()-1);
+//        setData(0, data.N()-1, data.N()-1);
+//
+//    }
+
+// 自底向上BottomUp,使用循环来实现
+
     private void run(){
 
         // TODO: 编写自己的动画逻辑
         setData(-1, -1, -1);
-        mergeSort(0, data.N()-1);
+        // 创建一个虚拟子数组
+        for(int sz =1; sz < data.N(); sz*=2)
+            for(int i = 0; i < data.N()-sz; i += sz+sz)
+                // 对arr[i...i+sz-1] 和 arr[i+sz...i+2*sz-1]进行归并
+                merge(i, i+sz-1, Math.min(i+sz+sz-1, data.N()-1));
         setData(0, data.N()-1, data.N()-1);
 
     }
