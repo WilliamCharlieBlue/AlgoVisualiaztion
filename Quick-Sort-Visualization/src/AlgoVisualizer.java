@@ -103,6 +103,7 @@ public class AlgoVisualizer {
         // 根据设置其它参数，初始化visualizer
 //        AlgoVisualizer visualizer = new AlgoVisualizer(sceneWidth, sceneHeight, N);
 //        AlgoVisualizer visualizer = new AlgoVisualizer(sceneWidth, sceneHeight, N, QuickSortData.Type.Ordered);
+//        AlgoVisualizer visualizer = new AlgoVisualizer(sceneWidth, sceneHeight, N, QuickSortData.Type.Identical);
         AlgoVisualizer visualizer = new AlgoVisualizer(sceneWidth, sceneHeight, N, QuickSortData.Type.NearlyOrdered);
     }
 }
