@@ -54,8 +54,13 @@ public class AlgoVisualizer {
     }
 
     private int partition(int l, int r){
+        // 默认将l作为标定点，在几乎有序情况下，变成O(n^2)算法。
+        // 因此，从l后面随机挑一个，与l互换即可
+        int p = (int)(Math.random()*(r-l+1)) + l;
+        setData(l, r, -1, p, -1);
+        data.swap(l, p);
+
         int v = data.get(l);
-        // 都将l作为第一个标定点
         setData(l, r, -1, l, -1);
         // arr[l=1...j] < v ; arr[j+1...i]
         int j =l;
