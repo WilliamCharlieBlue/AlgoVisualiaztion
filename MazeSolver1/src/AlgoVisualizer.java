@@ -14,11 +14,11 @@ public class AlgoVisualizer {
         data = new MazeData(mazeFile);
 
         int sceneHeight = data.N() * blockSide;
-        int sceneWeight = data.M() * blockSide;
+        int sceneWidth = data.M() * blockSide;
 
         // 初始化视图
         EventQueue.invokeLater(() -> {
-            frame = new AlgoFrame("Maze Solver Visualization", sceneWeight, sceneHeight);
+            frame = new AlgoFrame("Maze Solver Visualization", sceneWidth, sceneHeight);
 
             new Thread(() -> {
                 run();
