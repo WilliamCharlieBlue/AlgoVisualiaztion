@@ -30,7 +30,7 @@ public class MazeData {
             }
 
         entranceX = 1;
-        entranceY = 2;
+        entranceY = 0;
         exitX = N-2;
         exitY = M-1;
         maze[entranceX][entranceY] = ROAD;
